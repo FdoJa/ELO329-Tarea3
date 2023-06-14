@@ -1,66 +1,58 @@
+#include <QApplication>
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <QtWidgets>
 
+#include "housewindow.h"
 #include "door.h"
 #include "window.h"
+#include "doorview.h"
+#include "windowview.h"
 #include "central.h"
 
 using namespace std;
 
-int main(int argc, char * argv[]) {
-    ifstream fin;
-    int nDoors, nWindows, junk;
-
-    vector<Door *> doors;
-    vector<Window *> windows;
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    HouseWindow gui;  // gui: Graphical User Interface
     Central central;
-
+    ifstream fin;
+    int nDoors, nWindows;
     if (argc != 2) {
         cout << "Usage: "<<argv[0]<<" <configuration_file>" << endl;
         return -1;
     }
-
     fin.open(argv[1]);
     if (fin.fail()){
         cout << "Could not read file" << endl;
         return -2;
     }
-
     cout << "Argument:" << argv[1] << endl;
     fin >> nDoors;
     fin >> nWindows;
     cout << "nDoors:" << nDoors << " nWindows: " << nWindows << endl;
-
-    for(int i=0; i < nDoors; i++) {
-        int zone;
-        fin >> junk >> junk >> junk >> zone;
-
+    for(int i=0; i< nDoors; i++) {
+        int x, y, angle, zone;
+        fin >> x >> y >> angle >> zone;
         MagneticSensor * sensor = new MagneticSensor(zone);
+        DoorView * doorView = new DoorView(x,y,angle, sensor->getView());
+        new Door(sensor, doorView);
         central.addNewSensor(sensor);
-        doors.push_back(new Door(sensor));
+        gui.addHouseHollow(doorView);
     }
 
-    for(int i=0; i < nWindows; i++){
-        int zone;
-        fin >> junk >> junk >> junk >> zone;
-
+    for(int i=0; i< nWindows; i++) {
+        int x, y, angle, zone;
+        fin >> x >> y >> angle >> zone;
         MagneticSensor * sensor = new MagneticSensor(zone);
+        WindowView * windowView = new WindowView(x,y,angle, sensor->getView());
+        new Window(sensor, windowView);
         central.addNewSensor(sensor);
-        windows.push_back(new Window(sensor));
+        gui.addHouseHollow(windowView);
     }
 
-    for (size_t i=0; i<doors.size(); i++) { //size_t : unsigned int for dimensional length
-        doors[i]->changeState();
-        doors[i]->changeState();
-    }
-
-    for (size_t i=0; i<windows.size(); i++) {
-        windows[i]->changeState();
-        windows[i]->changeState();
-    }
-
-    central.checkZones();       // Revisar, debería estar cerrado
-    doors[0]->changeState();    // Abrir puerta principal
-    central.checkZones();       // Revisar, puerta principal abierta
+    gui.show();
+    return a.exec();
 }
