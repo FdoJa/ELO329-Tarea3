@@ -5,16 +5,13 @@ Door::Door()
 
 }
 
-Door::Door(int zone) : magneticSensor(zone) {
+Door::Door(MagneticSensor *sensor) : magneticSensor(sensor) {
 }
 
 void Door::changeState() {
-        if (magneticSensor.isClose()) {
-            magneticSensor.setSensorOpen();
-        } else {
-            magneticSensor.setSensorClose();
-        }
+    if (magneticSensor->isClose()) {
+        magneticSensor->setSensorOpen();
+    } else {
+        magneticSensor->setSensorClose();
+    }
 }
-
-
-
