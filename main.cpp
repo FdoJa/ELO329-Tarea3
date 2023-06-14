@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     HouseWindow gui;  // gui: Graphical User Interface
     Central central;
+    gui.setCentral(&central);
     ifstream fin;
     int nDoors, nWindows;
     if (argc != 2) {
