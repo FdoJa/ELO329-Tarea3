@@ -22,7 +22,8 @@
 ## Como compilar
 1) Dirigirse al directorio en donde está guardado el proyecto 
 2) Abrir archivo .pro de la stage a revisar
-3) En Qt creator, modificar el "run" del proyecto con tal de que utilice "config.txt" para ejecutarse.
+3) En Qt creator, modificar "run" del proyecto en pestaña "projects" con tal de que utilice "config.txt" para ejecutarse, por lo que en el apartado "Command line arguments" escribir "config.txt".
+4) Para el uso de las imagenes en la Stage4, en Qt creator ir a "run" del projecto en pestaña "projects" y modificar "working directory" a la carpeta donde se hayan guardado los archivos de este github, con tal de acceder correctamente a los .jpg en el código.
 
 ## Ejecucción 
 * En Qt creator, buildear y correr el programa
