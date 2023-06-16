@@ -33,4 +33,5 @@
 
 
 ## Documentacion realizada y diagrama de clases
-* La app utilizada para realizar la aplicación no lográ generar el plano general del diagrama de clases, solo genera un diagrama de cada clase; es por ello que se adjunta un link a ella dentro del archivo .pdf de documentación, dado que utiliza muchos archivos y es un tanto dificil ordenarla y verla correctamente en este github.
+* La app utilizada para realizar el diagrama de clases no lográ generar el plano general uniendo cada diagrama, en vez de ello solo genera un diagrama para cada clase especifica del proyecto;
+* Se adjunta un link a ella dentro del archivo .pdf de documentación, dado que utiliza muchos archivos y es un tanto dificil de visualizar correctamente en este github.
