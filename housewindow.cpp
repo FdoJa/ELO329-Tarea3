@@ -17,8 +17,6 @@ HouseWindow::HouseWindow(QWidget *parent, Central *central) : QMainWindow(parent
     connect(btnPerimeter, &QPushButton::clicked, this, &HouseWindow::activateSensorClicked);
     connect(btnDisarm, &QPushButton::clicked, this, &HouseWindow::desactivateSensorClicked);
 
-    // Conectar para cambiar alarma según apertura de puertas/ventanas
-
     // Display:
     Display = new QLabel("Seguridad activada", ui->alarmRegion);
     Display->setGeometry(50, 150, 100, 100);
@@ -26,10 +24,10 @@ HouseWindow::HouseWindow(QWidget *parent, Central *central) : QMainWindow(parent
     // Alarma:
     QString imagePath = QDir::currentPath() + "/alarmQuiet.jpg";
     Alarm = new QLabel(ui->alarmRegion);
-    Alarm->setGeometry(50, 50, 100, 100);  // Ajusta las coordenadas y el tamaño según tus necesidades
+    Alarm->setGeometry(50, 50, 100, 100);
     Alarm->setScaledContents(true);
 
-    QPixmap pixmap; // Reemplaza ":/ruta/imagen1.jpg" con la ruta correcta de la primera imagen
+    QPixmap pixmap;
     if (pixmap.load(imagePath)){
         Alarm->setPixmap(pixmap);
     }
